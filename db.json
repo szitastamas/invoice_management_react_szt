@@ -38,7 +38,7 @@
       "year": "2020",
       "month": "1",
       "note": "",
-      "isDone": "False"
+      "isDone": false
     },
     {
       "id": "12",
@@ -125,7 +125,7 @@
       "invoiceNr": "20191092",
       "year": "2020",
       "month": "1",
-      "note": "A Konto und Restzahlung",
+      "note": "Just a duplicate",
       "isDone": "False"
     },
     {
@@ -506,7 +506,7 @@
     },
     {
       "id": "76",
-      "invoiceNr": "20191146",
+      "invoiceNr": "20191148",
       "year": "2020",
       "month": "1",
       "note": "",
@@ -629,7 +629,7 @@
       "invoiceNr": "20191128",
       "year": "2020",
       "month": "1",
-      "note": "20191127 Bobby",
+      "note": "",
       "isDone": "False"
     },
     {
@@ -645,7 +645,7 @@
       "invoiceNr": "20191149",
       "year": "2020",
       "month": "1",
-      "note": "blablabla",
+      "note": "blablablaölk",
       "isDone": false
     },
     {
@@ -1541,8 +1541,8 @@
       "invoiceNr": "20190931",
       "year": "2019",
       "month": "11",
-      "note": "Ruhs Doppelzahlung Ausgezahlt am Febr.2020",
-      "isDone": "True"
+      "note": "",
+      "isDone": false
     },
     {
       "id": "205",
@@ -1997,8 +1997,8 @@
       "invoiceNr": "20191011",
       "year": "2019",
       "month": "12",
-      "note": "A Konto und Restzahlung",
-      "isDone": "False"
+      "note": "Another duplicate?!",
+      "isDone": false
     },
     {
       "id": "264",
@@ -2133,7 +2133,7 @@
       "invoiceNr": "20190990",
       "year": "2019",
       "month": "12",
-      "note": "A Konto und Restzahlung",
+      "note": "",
       "isDone": "False"
     },
     {
@@ -5436,7 +5436,7 @@
       "invoiceNr": "20190469",
       "year": "2019",
       "month": "6",
-      "note": "A Konto und Restzahlung",
+      "note": "",
       "isDone": false,
       "id": "vGEB9_b"
     },
@@ -5628,7 +5628,7 @@
       "invoiceNr": "20190443",
       "year": "2019",
       "month": "6",
-      "note": "Hanke A Konto und Rest",
+      "note": "",
       "isDone": false,
       "id": "VL7CSvD"
     },
@@ -15916,8 +15916,8 @@
       "invoiceNr": "20180084",
       "year": "2018",
       "month": "2",
-      "note": "A Konto, Rest",
-      "isDone": false,
+      "note": "",
+      "isDone": true,
       "id": "cXiGRQK"
     },
     {
@@ -16735,6 +16735,14 @@
       "note": "",
       "isDone": false,
       "id": "ITGyAPP"
+    },
+    {
+      "invoiceNr": "20191144",
+      "year": "2020",
+      "month": "1",
+      "note": "",
+      "isDone": false,
+      "id": "rYKCppK"
     }
   ]
 }

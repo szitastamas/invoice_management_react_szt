@@ -1,11 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import InvoiceContext from "../../contexts/invoice/InvoiceContext";
 import AlertContext from "../../contexts/alert/AlertContext";
-import CustomCheckBox from "../misc/CustomCheckBox";
 import MissingInvoiceDetails from "./MissingInvoiceDetails";
 
 export const InvoiceItem = ({
-  invoice: { ...invoice },
+  invoice,
   isDuplicate,
   isMissingNeighbour
 }) => {
@@ -15,12 +14,8 @@ export const InvoiceItem = ({
     months,
     setCurrent,
     deleteInvoice,
-    markForDeath,
-    removeMark
   } = useContext(InvoiceContext);
   const { setAlert } = useContext(AlertContext);
-
-  const [isMarked, setIsMarked] = useState(false);
 
   const handleDelete = () => {
     deleteInvoice(id);
@@ -30,15 +25,10 @@ export const InvoiceItem = ({
     setCurrent(invoice);
   };
 
-  const handleMarkToggle = () => {
-    setIsMarked(!isMarked);
-    isMarked ? removeMark(id) : markForDeath(invoice);
-  };
-
   useEffect(() => {
     if (isDuplicate) {
       setAlert({
-        text: `${invoiceNr} ist ein Duplikat!`,
+        text: `${invoiceNr} is a duplicate!`,
         msgType: "fail"
       });
     }
@@ -80,11 +70,6 @@ export const InvoiceItem = ({
           >
             <i className="material-icons">delete</i>
           </button>
-          <CustomCheckBox
-            cbFor={isMarked}
-            cbMethod={handleMarkToggle}
-            className="mark-for-death-cb mt-xlarge"
-          />
         </div>
       </div>
       {isMissingNeighbour && <MissingInvoiceDetails nextInvoiceIndex={nextInvoiceIndex} />}

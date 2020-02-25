@@ -1,4 +1,4 @@
-import React, { useReducer, useContext, useEffect } from "react";
+import React, { useReducer, useContext } from "react";
 import InvoiceContext from "./InvoiceContext";
 import InvoiceReducer from "./InvoiceReducer";
 import axios from "axios";
@@ -6,8 +6,6 @@ import {
   LOAD_INVOICES,
   ADD_INVOICE,
   DELETE_INVOICE,
-  MARK_FOR_DEATH,
-  REMOVE_MARK,
   EDIT_INVOICE,
   INVOICE_ERROR,
   TRIGGER_LOADING,
@@ -17,7 +15,6 @@ import {
   REMOVE_FILTERED
 } from "../reducerTypes";
 import AlertContext from "../alert/AlertContext";
-import orderByInvoiceNrDesc from "../../components/misc/orderByInvoiceNrDesc";
 
 export const InvoiceState = props => {
   const initialState = {
@@ -39,18 +36,12 @@ export const InvoiceState = props => {
     ],
     loading: false,
     current: null,
-    markedForDeath: [],
     error: null
   };
 
   const { setAlert } = useContext(AlertContext);
 
   const [state, dispatch] = useReducer(InvoiceReducer, initialState);
-
-  useEffect(() => {
-    loadAllInvoices();
-    // eslint-disable-next-line
-  }, [])
 
   const triggerLoading = () => {
     dispatch({
@@ -80,34 +71,32 @@ export const InvoiceState = props => {
     }
   };
 
-  const loadInvoicesPerYearAndMonth = async (year, month) => {
-    triggerLoading();
+  // This is another alternative to use filtering but I decided to filter through the invoices array on the frontend
+  // const loadInvoicesPerYearAndMonth = async (year, month) => {
+  //   triggerLoading();
 
-    // http://localhost:45587/invoices?year=2019&month=9&_page=1&limit=40&_sort=invoiceNr&_order=desc
+  //   // http://localhost:45587/invoices?year=2019&month=9&_page=1&limit=40&_sort=invoiceNr&_order=desc
 
-    let url = `http://localhost:45587/invoices?year=${year}&month=${month}&_sort=invoiceNr&_order=desc`;
+  //   let url = `http://localhost:45587/invoices?year=${year}&month=${month}&_sort=invoiceNr&_order=desc`;
 
-      try {
-        const res = await axios(url);
-
-        dispatch({
-          type: SET_FILTERED,
-          payload: res.data
-        });
-      } catch (err) {
-        console.error(err.message);
-        dispatch({
-          type: INVOICE_ERROR,
-          payload: err.message
-        });
-        setAlert({
-          text: err.message,
-          msgType: "fail"
-        });
-      }
-
-
-  }
+  //     try {
+  //       const res = await axios(url);
+  //       dispatch({
+  //         type: SET_FILTERED,
+  //         payload: [...res.data].sort(orderByInvoiceNrDesc)
+  //       });
+  //     } catch (err) {
+  //       console.error(err.message);
+  //       dispatch({
+  //         type: INVOICE_ERROR,
+  //         payload: err.message
+  //       });
+  //       setAlert({
+  //         text: err.message,
+  //         msgType: "fail"
+  //       });
+  //     }
+  // }
 
   const addInvoice = async invoice => {
     try {
@@ -122,7 +111,7 @@ export const InvoiceState = props => {
       });
 
       const msg = {
-        text: `Rechnung ${invoice.invoiceNr} hinzugefügt`,
+        text: `Invoice ${invoice.invoiceNr} added`,
         msgType: "success"
       };
 
@@ -159,7 +148,7 @@ export const InvoiceState = props => {
       });
 
       setAlert({
-        text: `Rechnung ${invoice.invoiceNr} wurde aktualisiert`,
+        text: `Invoice ${invoice.invoiceNr} has been updated`,
         msgType: "success"
       });
     } catch (err) {
@@ -183,7 +172,7 @@ export const InvoiceState = props => {
         payload: id
       });
       const msg = {
-        text: "Rechnung erfolgreich gelöscht",
+        text: "Invoice sucessfully deleted",
         msgType: "success"
       };
       setAlert(msg);
@@ -200,44 +189,13 @@ export const InvoiceState = props => {
     }
   };
 
-  const deleteMultiple = ids => {
-    ids.forEach(async id => {
-      try {
-        await deleteInvoice(id);
-      } catch (err) {
-        console.error(err.message);
-        setAlert({
-          text: err.message,
-          msgType: "fail"
-        })
-      }
-    });
-    setAlert({
-      text: `${ids.length} Rechnungen gelöscht`,
-      msgType: "success"
-    });
-  };
-
-  const markForDeath = invoice => {
-    dispatch({
-      type: MARK_FOR_DEATH,
-      payload: invoice
-    });
-  };
-
-  const removeMark = id => {
-    dispatch({
-      type: REMOVE_MARK,
-      payload: id
-    });
-  };
-
-  const setFiltered = invoices => {
-    dispatch({
-      type: SET_FILTERED,
-      payload: [...invoices].sort(orderByInvoiceNrDesc)
-    })
-  }
+	const setFiltered = (invoices) => {
+    triggerLoading();
+		dispatch({
+			type: SET_FILTERED,
+			payload: invoices
+		});
+	};
 
   const removeFiltered = () => {
     dispatch({
@@ -266,15 +224,10 @@ export const InvoiceState = props => {
         invoices: state.invoices,
         filteredInvoices: state.filteredInvoices,
         current: state.current,
-        markedForDeath: state.markedForDeath,
         addInvoice,
         editInvoice,
         loadAllInvoices,
-        loadInvoicesPerYearAndMonth,
         deleteInvoice,
-        deleteMultiple,
-        markForDeath,
-        removeMark,
         setFiltered,
         removeFiltered,
         setCurrent,

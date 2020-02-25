@@ -1,24 +1,14 @@
-import React, { useContext, useEffect, useState, Fragment } from "react";
+import React, { useContext, useEffect, Fragment } from "react";
 import InvoiceForm from "./forms/InvoiceForm";
 import InvoiceContainer from "./invoice/InvoiceContainer";
 import InvoiceContext from "../contexts/invoice/InvoiceContext";
-import InvoiceFilter from "./invoice/InvoiceFilter";
 import Loading from "./loading/Loading";
 
 export const Dashboard = () => {
-  const { loading, loadInvoicesPerYearAndMonth, invoices } = useContext(InvoiceContext);
+  const { loading, loadAllInvoices } = useContext(InvoiceContext);
 
   useEffect(() => {
-
-    const year =
-      !localStorage["currentlyFilteredYear"] || localStorage["currentlyFilteredYear"] == "all"
-        ? 2020
-        : localStorage["currentlyFilteredYear"];
-    const month =
-      localStorage["currentlyFilteredMonth"] == null
-        ? 1
-        : localStorage["currentlyFilteredMonth"];
-    loadInvoicesPerYearAndMonth(year, month);
+    loadAllInvoices();
     // eslint-disable-next-line
   }, []);
 

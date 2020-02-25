@@ -17,16 +17,16 @@ export const FilteredInvoices = ({ duplicates, theOnesMissingNeighbours }) => {
             style={{ padding: ".4rem", maxHeight: "50px" }}
           >
             <div className="row" style={{ fontWeight: "bold" }}>
-              <div className="col s3 m2 fs-small">Rechnung Nr.</div>
-              <div className="col m1 hide-on-med-and-down fs-small">Jahr</div>
-              <div className="col m1 hide-on-med-and-down fs-small">Monat</div>
-              <div className="col s2 m3 fs-small">Bemerkung</div>
+              <div className="col s3 m2 fs-small">Invoice Nr.</div>
+              <div className="col m1 hide-on-med-and-down fs-small">Year</div>
+              <div className="col m1 hide-on-med-and-down fs-small">Month</div>
+              <div className="col s2 m3 fs-small">Note</div>
               <div className="col s3 m2 fs-small">Status</div>
               <div
                 className="col s3 m2 blue-text text-darken-2 right"
                 style={{ textTransform: "uppercase", fontSize: ".8rem" }}
               >
-                {filteredInvoices.length} Rechnungen
+                {filteredInvoices.length} invoices
               </div>
             </div>
           </li>

@@ -14,7 +14,7 @@ export const MissingInvoiceDetails = ({ nextInvoiceIndex }) => {
 
     return (
         <div className="missing-invoice-details">
-           Nächste Rechnung: { invoiceNr }
+           Next invoice: { invoiceNr }
         </div>
     )
 }

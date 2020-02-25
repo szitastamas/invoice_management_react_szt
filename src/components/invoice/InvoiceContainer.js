@@ -11,7 +11,7 @@ export const InvoiceContainer = () => {
   const duplicates = searchForDuplicates(invoices);
 
   return (
-      filteredInvoices.length === 0 ? <p className="teal-text center">Es gibt keine Rechnungen in diesem Jahr und Monat</p> :
+      filteredInvoices.length === 0 ? <p className="teal-text center">There are no invoices in this year and month</p> :
       <FilteredInvoices
         theOnesMissingNeighbours={theOnesMissingNeighbours}
         duplicates={duplicates}

@@ -5,7 +5,7 @@ export const Navbar = () => {
     <nav>
       <div className="nav-wrapper teal darken-1">
         <div className="brand-logo">
-          Rechnung Verwaltung
+          Invoice Management
         </div>
       </div>
     </nav>
